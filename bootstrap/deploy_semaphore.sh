@@ -55,7 +55,7 @@ $DOCKER_CMD run -d \
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ Semaphore UI deployed successfully!${NC}"
-    echo -e "${GREEN}🌐 Access it via your browser: http://<NANO1_IP>:${SEMAPHORE_PORT}${NC}"
+    echo -e "${GREEN}🌐 Access it via your browser: http://sandbox1.lan:${SEMAPHORE_PORT}${NC}"
     echo -e "${YELLOW}👤 Username: ${SEMAPHORE_USER}${NC}"
     echo -e "${YELLOW}🔑 Password: ${SEMAPHORE_PASSWORD}${NC}"
 else
