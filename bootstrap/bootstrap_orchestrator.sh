@@ -51,12 +51,12 @@ BASE_URL="https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITH
 if [ "$SILENT_MODE" = false ]; then
     echo -e "${YELLOW}📋 Running in Interactive Mode.${NC}"
     
-    read -p "❔ Do you want to configure a custom port for Semaphore? (Default 3000): " input_port
+    read -p "❔ Do you want to configure a custom port for Semaphore? (Default 3000): " input_port < /dev/tty
     if [ ! -z "$input_port" ]; then
         SEMAPHORE_PORT=$input_port
     fi
 
-    read -s -p "❔ Enter Admin Password for Semaphore: " input_pass
+    read -s -p "❔ Enter Admin Password for Semaphore: " input_pass < /dev/tty
     echo ""
     if [ ! -z "$input_pass" ]; then
         SEMAPHORE_PASSWORD=$input_pass
