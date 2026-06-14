@@ -71,7 +71,7 @@ execute_remote_script() {
     local script_url="${BASE_URL}/${script_name}"
     
     echo -e "${BLUE}📥 Downloading ${script_name} from GitHub...${NC}"
-    curl -sSL "$script_url" -o "$script_name"
+    wget -q "$script_url" -O "$script_name"
     
     if [ $? -ne 0 ] || [ ! -f "$script_name" ]; then
         echo -e "${RED}❌ Critical Error: Could not retrieve ${script_name}.${NC}"

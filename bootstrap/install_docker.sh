@@ -16,27 +16,10 @@ if command -v docker &> /dev/null; then
     exit 0
 fi
 
-# Detect installation environment (Ubuntu Core uses Snap exclusively)
-if command -v snap &> /dev/null; then
-    echo -e "${YELLOW}📦 Snap environment detected (Ubuntu Core). Installing Docker via snap...${NC}"
-    
-    # Install Docker from the Snap Store
-    sudo snap install docker
-    
-    # Required security connection in Ubuntu Core to access user home directories
-    echo -e "${BLUE}⚙️ Configuring Snap plug connections (docker:home)...${NC}"
-    sudo snap connect docker:home
-    
-    # Enable and start the Docker service
-    echo -e "${BLUE}🔄 Ensuring Docker service is active and running...${NC}"
-    sudo snap start docker
-else
-    # Fallback if executed on a standard Ubuntu Server/Debian machine
-    echo -e "${YELLOW}📦 Standard package manager detected. Installing Docker via apt...${NC}"
-    sudo apt-get update -y
-    sudo apt-get install -y docker.io
-    sudo systemctl enable --now docker
-fi
+echo -e "${YELLOW}📦 Installing Docker via apt...${NC}"
+sudo apt-get update -y
+sudo apt-get install -y docker.io
+sudo systemctl enable --now docker
 
 # Setup user permissions to run Docker without 'sudo' where possible
 echo -e "${BLUE}👥 Configuring Docker group permissions...${NC}"
