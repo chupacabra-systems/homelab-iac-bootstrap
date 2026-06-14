@@ -1,0 +1,50 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor and IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Environment variables and secrets
+.env
+.env.*
+*.pem
+*.key
+*secret*.yml
+*secret*.yaml
+
+# Bash/Shell script artifacts
+*.log
+*.tmp
+*.bak
+.bash_history
+
+# Documentation builds (e.g., MkDocs, Sphinx)
+site/
+_build/
+docs/_build/
+
+# Infrastructure as Code (IaC) - Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terragrunt
+.terragrunt-cache/
+
+# Ansible
+*.retry
+
+# Packer
+packer_cache/
