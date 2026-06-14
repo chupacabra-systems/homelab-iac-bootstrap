@@ -7,7 +7,7 @@ This repository contains scripts to bootstrap a fresh Ubuntu machine with Docker
 To run the complete bootstrap process (installing Docker and deploying Semaphore UI) interactively, you can download and execute the orchestrator script directly from GitHub:
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/chupacabra-systems/homelab-iac-bootstrap/feature/poc/bootstrap/bootstrap_orchestrator.sh | bash
+wget -qO- https://raw.githubusercontent.com/chupacabra-systems/homelab-iac-bootstrap/feature/poc/bootstrap/bootstrap_orchestrator.sh | bash -s -- -s
 ```
 
 *(Note: You can also pass arguments to the orchestrator, like `-s` for silent mode, by downloading it first: `curl -O ... && bash bootstrap_orchestrator.sh -s`)*
