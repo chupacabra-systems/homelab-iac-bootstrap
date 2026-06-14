@@ -10,7 +10,7 @@ NC='\033[0m'
 # --- UPDATE THESE TO POINT TO YOUR GITHUB REPO ---
 GITHUB_USER="chupacabra-systems"
 GITHUB_REPO="homelab-iac-bootstrap"
-GITHUB_BRANCH="main"
+GITHUB_BRANCH="feature/poc"
 
 # Default Controller Parameters
 SILENT_MODE=false
