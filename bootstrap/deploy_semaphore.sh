@@ -32,6 +32,10 @@ DATA_DIR="$HOME/semaphore_data"
 echo -e "${BLUE}📂 Creating persistence directory at: $DATA_DIR${NC}"
 mkdir -p "$DATA_DIR"
 
+# The Semaphore UI container runs as an unprivileged user (UID 1001) for security.
+# We must grant this user ownership of the host directory to prevent 'permission denied' database panics.
+sudo chown -R 1001:1001 "$DATA_DIR"
+
 # Run official Semaphore container using BoltDB (embedded database for low memory footprint)
 echo -e "${BLUE}🐳 Spinning up Semaphore UI container on port $SEMAPHORE_PORT...${NC}"
 
