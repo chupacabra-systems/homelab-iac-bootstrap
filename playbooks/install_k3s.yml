@@ -1,0 +1,44 @@
+---
+- name: Bootstrap K3s Cluster
+  hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: Check if K3s is already installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s
+      register: k3s_binary
+
+    - name: Download and Install K3s
+      when: not k3s_binary.stat.exists
+      ansible.builtin.shell:
+        cmd: "curl -sfL https://get.k3s.io | sh -"
+        creates: /usr/local/bin/k3s
+      register: k3s_install_result
+      changed_when: k3s_install_result.rc == 0
+
+    - name: Ensure K3s service is started and enabled
+      ansible.builtin.systemd:
+        name: k3s
+        state: started
+        enabled: yes
+
+    - name: Wait for Kubeconfig to be created on the node
+      ansible.builtin.wait_for:
+        path: /etc/rancher/k3s/k3s.yaml
+        timeout: 90
+
+    - name: Fetch Kubeconfig file from the node
+      ansible.builtin.fetch:
+        src: /etc/rancher/k3s/k3s.yaml
+        dest: "./k3s-config-{{ inventory_hostname }}.yaml"
+        flat: yes
+
+    - name: Set correct ownership on fetched Kubeconfig
+      delegate_to: localhost
+      become: no
+      ansible.builtin.file:
+        path: "./k3s-config-{{ inventory_hostname }}.yaml"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_gid }}"
+        mode: '0600'
